@@ -46,7 +46,7 @@ def Main():
     startupinfo.wShowWindow = 0x0
     startupinfo.cb = sizeof(startupinfo)
     currentpath = os.getcwd()
-    if ctypes_createprocess.CreateProcessA(bytes(currentpath + "\\JUMP_FORCE\\Binaries\\Win64\\JUMP_FORCE-Win64-Shipping.exe", "UTF-8"), None, None, None, None, 0, None, None, byref(startupinfo), byref(processinfo)):
+    if ctypes_createprocess.CreateProcessA(bytes(currentpath + "\\JUMP_FORCE\\Binaries\\Win64\\JUMP_FORCE-Win64-Shipping.exe", "UTF-8"), bytes("-eac-nop-loaded", "UTF-8"), None, None, None, 0, None, None, byref(startupinfo), byref(processinfo)):
        print("[+] Process Created!!!")
     else:
         print("[-] Failed!!!")
