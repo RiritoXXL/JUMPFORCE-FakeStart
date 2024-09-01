@@ -1,6 +1,7 @@
 import os
 import sys
 import pathlib
+import time
 from ctypes import *
 WORD = c_ushort
 DWORD = c_ulong
@@ -46,10 +47,10 @@ def Main():
     startupinfo.wShowWindow = 0x0
     startupinfo.cb = sizeof(startupinfo)
     currentpath = os.getcwd()
-    ptr_sinfo = byref(startupinfo)
-    ptr_pinfo = byref(processinfo)
-    if ctypes_createprocess.CreateProcessA(bytes(currentpath + "\\JUMP_FORCE\\Binaries\\Win64\\JUMP_FORCE-Win64-Shipping.exe", "UTF-8"), bytes("-eac-nop-loaded", "UTF-8"), None, None, None, 0, None, None, ptr_sinfo, ptr_pinfo):
+    if ctypes_createprocess.CreateProcessA(bytes(currentpath + "\\JUMP_FORCE\\Binaries\\Win64\\JUMP_FORCE-Win64-Shipping.exe", "UTF-8"), bytes("-eac-nop-loaded", "UTF8"), None, None, None, 0, None, None, byref(startupinfo), byref(processinfo)):
        print("[+] Process Created!!!")
+       time.sleep(7)
+       os._exit(113)
     else:
         print("[-] Failed!!!")
 
